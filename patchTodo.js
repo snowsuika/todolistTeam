@@ -34,7 +34,7 @@ const patchTodo = (req,res,todos) =>{
             }
             res.end()
         }catch(err){
-            res.writeHead(200,headers);
+            res.writeHead(400,headers);
             res.write(JSON.stringify({
                 "status":"false",
                 "message":err.name +'-'+err.message
