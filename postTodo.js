@@ -8,18 +8,21 @@ const headers = {
 }
 
 const httpStatusObj = {
-    OK: 200,
-    BAD_REQUEST: 400,
-    NOT_FOUND: 404,
-    SERVER_ERROR: 500,
-    getStatusMessage: function(statusCode){
-        const mes = {
-            200: "OK.",
-            400: "data not correct or find not todo!",
-            404: "not found.",
-            500: "Internal Server Error."
-        }
-        return mes[statusCode];
+    OK: {
+        code:200,
+        message: "OK."
+    },
+    BAD_REQUEST: {
+        cose: 400,
+        message: "data not correct or find not todo!"
+    },
+    NOT_FOUND: {
+        code: 404,
+        message: "not found."
+    },
+    SERVER_ERROR: {
+        code: 500,
+        message: "Internal Server Error."   
     }
 }
 
@@ -38,9 +41,9 @@ const postTodo = (req, res, todos) => {
                     id: uuidv4()
                 }
                 todos.push(todo);
-                res.writeHead(httpStatusObj.OK , headers);
+                res.writeHead(httpStatusObj.OK.code , headers);
                 res.write(JSON.stringify({
-                    'status': httpStatusObj.getStatusMessage(httpStatusObj.OK),
+                    'status': httpStatusObj.OK.message,
                     'data': todos
                 }))
                 res.end();
