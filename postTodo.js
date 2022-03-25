@@ -7,7 +7,7 @@ const headers = {
     'Content-Type': 'application/json'
 }
 
-const httpStatusObj = {
+const HTTP_STATUS = {
     OK: {
         code:200,
         message: "OK."
@@ -41,9 +41,9 @@ const postTodo = (req, res, todos) => {
                     id: uuidv4()
                 }
                 todos.push(todo);
-                res.writeHead(httpStatusObj.OK.code , headers);
+                res.writeHead(HTTP_STATUS.OK.code , headers);
                 res.write(JSON.stringify({
-                    'status': httpStatusObj.OK.message,
+                    'status': HTTP_STATUS.OK.message,
                     'data': todos
                 }))
                 res.end();
