@@ -1,3 +1,5 @@
+const errorHandler = require('./errorHandle');
+
 const headers = {
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Allow-Origin': '*',
@@ -11,15 +13,6 @@ const successHandler = (res, todos) => {
         "status": "success",
         "message": "刪除成功",
         "data": todos
-    }));
-    res.end();
-}
-
-const errorHandler = res => {
-    res.writeHead(400, headers);
-    res.write(JSON.stringify({
-        "status": "false",
-        "message": "欄位未填寫正確，或無此id"
     }));
     res.end();
 }
