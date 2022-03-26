@@ -1,5 +1,5 @@
 const errorHandle = require('./errorHandle');
-const { v4: uuidv4 } = require('uuid');
+
 const headers = {
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Allow-Origin': '*',
@@ -35,7 +35,7 @@ const postTodo = (req, res, todos) => {
             if(typeof(title) !== 'undefined') {
                 const todo = {
                     title,
-                    id: uuidv4()
+                    id: req.uuidv4
                 }
                 todos.push(todo);
                 res.writeHead(HTTP_STATUS.OK.code , headers);

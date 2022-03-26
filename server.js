@@ -14,6 +14,7 @@ const requestListener = async (req, res) => {
     req.on('data', chunk => body += chunk)
     await new Promise((resolve) => req.on("end", resolve));
     req['body'] = body
+    req['uuidv4'] = uuidv4()
 
 
     if (req.url == "/todos" && req.method == "GET") {
