@@ -17,8 +17,8 @@ const deleteAllTodos = (type, res, todos) => {
 }
 
 /** 刪除單筆 todo */
-const deleteSingleTodo = (res, todos) => {
-    const id = url.split('/').pop();
+const deleteSingleTodo = (req ,res, todos) => {
+    const id = req.url.split('/').pop();
     const index = todos.findIndex(item => item.id === id);
     if (index !== -1) {
         todos.splice(index, 1);
