@@ -4,6 +4,7 @@ const errHandle = require('./errorHandle');
 const getTodo = require('./getTodo')
 const postTodo = require('./postTodo')
 const { deleteAllTodos, deleteSingleTodo } = require('./deleteTodo')
+const patchTodo = require('./patchTodo')
 const todos = [];
 
 const requestListener = async (req, res) => {
@@ -27,9 +28,9 @@ const requestListener = async (req, res) => {
     } else if (req.url == "/todos" && req.method == "DELETE") {
         deleteAllTodos('type', res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
-        //deleteSingleTodo(res, todos)
+        deleteSingleTodo(req, res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
-        // patchTodo.js
+        patchTodo(req, res, todos)
     } else if (req.method == "OPTIONS") {
         res.writeHead(200, headers);
         res.end();
