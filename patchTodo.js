@@ -1,14 +1,5 @@
-const headers = {
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
-    'Content-Type': 'application/json'
-}
-
 const patchTodo = (req,res,todos) =>{
-
-
-
+        const { headers } = res
         try{
             const title = JSON.parse(req.body).title;
             const id = req.url.split('/').pop();
