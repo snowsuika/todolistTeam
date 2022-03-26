@@ -1,5 +1,3 @@
-const errorHandle = require('./errorHandle');
-
 const HTTP_STATUS = {
     OK: {
         code: 200,
@@ -34,11 +32,12 @@ const postTodo = (req, res, todos) => {
                 'data': todos
             }))
             res.end();
+            return true
         } else {
-            errorHandle(res)
+            return false
         }
     } catch (err) {
-        errorHandle(res);
+        return false
     }
 
 }
