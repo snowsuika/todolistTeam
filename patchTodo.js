@@ -6,15 +6,11 @@ const headers = {
 }
 
 const patchTodo = (req,res,todos) =>{
-    let body = "";
 
-    req.on('data',chuck=>{
-        body += chuck;
-    })
 
-    req.on('end',()=>{
+
         try{
-            const title = JSON.parse(body).title;
+            const title = JSON.parse(req.body).title;
             const id = req.url.split('/').pop();
             const index = todos.findIndex(el => el.id === id);
             if(title !== undefined && index !== -1){
@@ -41,7 +37,7 @@ const patchTodo = (req,res,todos) =>{
             }))
             res.end()
         }
-    })
+    
 }
 
 

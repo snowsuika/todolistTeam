@@ -27,14 +27,11 @@ const HTTP_STATUS = {
 }
 
 const postTodo = (req, res, todos) => {
-    let body = '';
-    req.on('data' , chunk => {
-        body += chunk;
-    })
 
-    req.on('end' , () => {
+
+
         try {
-            const title = JSON.parse(body).title;
+            const title = JSON.parse(req.body).title;
             if(typeof(title) !== 'undefined') {
                 const todo = {
                     title,
@@ -53,7 +50,7 @@ const postTodo = (req, res, todos) => {
         } catch(err) {
             errorHandle(res);
         }
-    })
+    
 }
 
 module.exports = postTodo;

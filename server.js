@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const errHandle = require('./errorHandle');
 const todos = [];
 
-const requestListener = (req, res) => {
+const requestListener = async (req, res) => {
     const headers = {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
         'Access-Control-Allow-Origin': '*',
@@ -11,10 +11,10 @@ const requestListener = (req, res) => {
         'Content-Type': 'application/json'
     }
     let body = "";
+    req.on('data', chunk => body += chunk)
+    await new Promise((resolve) => req.on("end", resolve));
+    req['body'] = body
 
-    req.on('data', chunk => {
-        body += chunk;
-    })
 
     if (req.url == "/todos" && req.method == "GET") {
         // getTodo.js
