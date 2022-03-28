@@ -35,7 +35,6 @@ const postTodo = (req, res, todos, body) => {
                 'data': todos
             }))
             res.end();
-            Handle.successHandler(res, todos)
         } else {
             Handle.errorHandle(res)
         }
