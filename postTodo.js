@@ -29,6 +29,7 @@ const postTodo = (req, res, todos, body) => {
                 id: library.uuidv4()
             }
             todos.push(todo);
+            // TODO: 這裡應該改成用 Handle.successHandler
             res.writeHead(HTTP_STATUS.OK.code, library.headers);
             res.write(JSON.stringify({
                 'status': HTTP_STATUS.OK.message,
