@@ -17,7 +17,7 @@ const requestListener = async (req, res) => {
     } else if (req.url == "/todos" && req.method == "POST") {
         postTodo(req, res, todos)
     } else if (req.url == "/todos" && req.method == "DELETE") {
-        deleteAllTodos('type', res, todos)
+        deleteAllTodos(res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
         deleteSingleTodo(req, res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {

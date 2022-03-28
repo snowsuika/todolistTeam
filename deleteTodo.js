@@ -1,7 +1,7 @@
 const Handle = require('./handle');
 
 /** 刪除全部 todos */
-const deleteAllTodos = (type, res, todos) => {
+const deleteAllTodos = (res, todos) => {
     todos.length = 0;
     Handle.successHandler(res, todos);
 }
