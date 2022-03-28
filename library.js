@@ -7,6 +7,6 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-const id = uuidv4()
 
-module.exports = { headers, id };
+
+module.exports = { headers, uuidv4 };

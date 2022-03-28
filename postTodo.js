@@ -26,7 +26,7 @@ const postTodo = (req, res, todos) => {
         if (typeof (title) !== 'undefined') {
             const todo = {
                 title,
-                id: library.id
+                id: library.uuidv4()
             }
             todos.push(todo);
             res.writeHead(HTTP_STATUS.OK.code, library.headers);
