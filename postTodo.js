@@ -1,4 +1,6 @@
 const Handle = require('./handle');
+const library = require("./library")
+
 const HTTP_STATUS = {
     OK: {
         code: 200,
@@ -24,10 +26,10 @@ const postTodo = (req, res, todos) => {
         if (typeof (title) !== 'undefined') {
             const todo = {
                 title,
-                id: req.uuidv4
+                id: library.id
             }
             todos.push(todo);
-            res.writeHead(HTTP_STATUS.OK.code, res.headers);
+            res.writeHead(HTTP_STATUS.OK.code, library.headers);
             res.write(JSON.stringify({
                 'status': HTTP_STATUS.OK.message,
                 'data': todos
@@ -35,7 +37,7 @@ const postTodo = (req, res, todos) => {
             res.end();
             Handle.successHandler(res, todos)
         } else {
-            return false
+            Handle.errorHandle(res)
         }
     } catch (err) {
         Handle.errorHandle(res)

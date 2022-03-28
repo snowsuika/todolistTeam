@@ -1,5 +1,6 @@
+const { headers } = require("./library")
+
 const patchTodo = (req, res, todos) => {
-    const { headers } = res
     try {
         const title = JSON.parse(req.body).title;
         const id = req.url.split('/').pop();
