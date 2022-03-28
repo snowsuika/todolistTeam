@@ -1,17 +1,9 @@
-const successHandler = (res, todos) => {
-    res.writeHead(200, res.headers);
-    res.write(JSON.stringify({
-        "status": "success",
-        "message": "刪除成功",
-        "data": todos
-    }));
-    res.end();
-}
+const Handle = require('./handle');
 
 /** 刪除全部 todos */
 const deleteAllTodos = (type, res, todos) => {
     todos.length = 0;
-    successHandler(res, todos);
+    Handle.successHandler(res, todos);
 }
 
 /** 刪除單筆 todo */
@@ -20,10 +12,9 @@ const deleteSingleTodo = (req, res, todos) => {
     const index = todos.findIndex(item => item.id === id);
     if (index !== -1) {
         todos.splice(index, 1);
-        successHandler(res, todos);
-        return true
+        Handle.successHandler(res, todos);
     } else {
-        return false
+        Handle.errorHandle(res)
     }
 }
 

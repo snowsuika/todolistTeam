@@ -1,3 +1,4 @@
+const Handle = require('./handle');
 const HTTP_STATUS = {
     OK: {
         code: 200,
@@ -32,12 +33,12 @@ const postTodo = (req, res, todos) => {
                 'data': todos
             }))
             res.end();
-            return true
+            Handle.successHandler(res, todos)
         } else {
             return false
         }
     } catch (err) {
-        return false
+        Handle.errorHandle(res)
     }
 
 }
