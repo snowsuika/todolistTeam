@@ -15,13 +15,13 @@ const requestListener = async (req, res) => {
     if (req.url == "/todos" && req.method == "GET") {
         getTodo(res, todos)
     } else if (req.url == "/todos" && req.method == "POST") {
-        postTodo(req, res, todos)
+        postTodo(req, res, todos, body)
     } else if (req.url == "/todos" && req.method == "DELETE") {
         deleteAllTodos(res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
         deleteSingleTodo(req, res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
-        patchTodo(req, res, todos)
+        patchTodo(req, res, todos, body)
     } else if (req.method == "OPTIONS") {
         res.writeHead(200, library.headers);
         res.end();

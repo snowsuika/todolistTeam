@@ -1,8 +1,8 @@
 const { headers } = require("./library")
 
-const patchTodo = (req, res, todos) => {
+const patchTodo = (req, res, todos, body) => {
     try {
-        const title = JSON.parse(req.body).title;
+        const title = JSON.parse(body).title;
         const id = req.url.split('/').pop();
         const index = todos.findIndex(el => el.id === id);
         if (title !== undefined && index !== -1) {

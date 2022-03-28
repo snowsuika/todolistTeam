@@ -20,9 +20,9 @@ const HTTP_STATUS = {
     }
 }
 
-const postTodo = (req, res, todos) => {
+const postTodo = (req, res, todos, body) => {
     try {
-        const title = JSON.parse(req.body).title;
+        const title = JSON.parse(body).title;
         if (typeof (title) !== 'undefined') {
             const todo = {
                 title,
