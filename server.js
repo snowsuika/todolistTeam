@@ -1,36 +1,32 @@
 const http = require('http');
-const { v4: uuidv4 } = require('uuid');
-const errHandle = require('./errorHandle');
+const library = require("./library")
+const getTodo = require('./getTodo')
+const postTodo = require('./postTodo')
+const { deleteAllTodos, deleteSingleTodo } = require('./deleteTodo')
+const patchTodo = require('./patchTodo')
 const todos = [];
 
-const requestListener = (req, res)=>{
-    const headers = {
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
-        'Content-Type': 'application/json'
-    }
+const requestListener = async (req, res) => {
     let body = "";
-    
-    req.on('data', chunk=>{
-        body+=chunk;
-    })
-    
-    if(req.url=="/todos" && req.method == "GET"){
-        // getTodo.js
-    }else if(req.url=="/todos" && req.method == "POST"){
-        // postTodo.js
-    }else if(req.url=="/todos" && req.method == "DELETE"){
-        // deleteTodo.js
-    }else if(req.url.startsWith("/todos/") && req.method=="DELETE"){
-        // deleteTodo.js
-    }else if(req.url.startsWith("/todos/") && req.method=="PATCH"){
-        // patchTodo.js
-    }else if(req.method == "OPTIONS"){
-        res.writeHead(200,headers);
+    req.on('data', chunk => body += chunk)
+    await new Promise((resolve) => req.on("end", resolve));
+    req['body'] = body
+
+    if (req.url == "/todos" && req.method == "GET") {
+        getTodo(res, todos)
+    } else if (req.url == "/todos" && req.method == "POST") {
+        postTodo(req, res, todos, body)
+    } else if (req.url == "/todos" && req.method == "DELETE") {
+        deleteAllTodos(res, todos)
+    } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
+        deleteSingleTodo(req, res, todos)
+    } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
+        patchTodo(req, res, todos, body)
+    } else if (req.method == "OPTIONS") {
+        res.writeHead(200, library.headers);
         res.end();
-    }else{
-        res.writeHead(404,headers);
+    } else {
+        res.writeHead(404, library.headers);
         res.write(JSON.stringify({
             "status": "false",
             "message": "無此網站路由"
