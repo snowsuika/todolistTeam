@@ -16,3 +16,7 @@ const HTTP_STATUS = {
       message: "Internal Server Error."
   }
 }
+
+module.exports = {
+    HTTP_STATUS
+};
