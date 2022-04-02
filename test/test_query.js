@@ -41,9 +41,6 @@ describe('POST /todos 測試', () => {
     });
 });
 
-
-
-
 describe('DELETE /todos 刪除全部 測試', () => {
     let id = "";
     // 刪除前先新增一筆資料
@@ -92,7 +89,7 @@ describe('DELETE /todos 刪除單筆 測試', () => {
                 done();
             });
     });
-    it('response.body 必須是吻合測試條件', (done) => {
+    it('刪除單筆 response.body  必須是吻合測試條件', (done) => {
         api.delete(`/todos/${idArray[0]}`)
             .expect(200)
             .end((err, res) => {
@@ -103,6 +100,47 @@ describe('DELETE /todos 刪除單筆 測試', () => {
                 assert.hasAllKeys(res.body.data[0], ['title', 'id']);
                 // 刪除 idArray[0] 後剩餘 idArray[1]
                 assert.equal(res.body.data[0].id, idArray[1]);
+                done();
+            });
+    });
+});
+
+describe('PATCH /todos 編輯 測試', () => {
+    const idArray = [];
+    before((done) => {
+        // 先刪除全部
+        api.delete('/todos')
+            .expect(200)
+            .end((err, res) => {
+                assert.notExists(err);
+                assert.hasAllKeys(res.body, ['status', 'data']);
+                expect(res.body.data).to.be.a('array');
+                assert.equal(res.body.data.length, 0);
+            });
+        // 新增一筆資料
+        const postObj = { "title": "新增資料3" }
+        api.post('/todos')
+            .send(postObj)
+            .expect(200)
+            .end((err, res) => {
+                idArray.push(res.body.data[0].id)
+                done();
+            });
+    });
+
+    it('response.body 必須是吻合測試條件', (done) => {
+        const patchObj = { "title": "修改資料3" }
+        api.patch(`/todos/${idArray[0]}`)
+            .expect(200)
+            .send(patchObj)
+            .end((err, res) => {
+                assert.notExists(err);
+                assert.hasAllKeys(res.body, ['status', 'data']);
+                expect(res.body.data).to.be.a('array');
+                expect(res.body.data[0]).to.be.a('object');
+                assert.hasAllKeys(res.body.data[0], ['title', 'id']);
+                assert.equal(res.body.data[0].id, idArray[0]);
+                assert.equal(res.body.data[0].title, patchObj.title);
                 done();
             });
     });
