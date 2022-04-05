@@ -31,10 +31,10 @@ const postTodo = (req, res, todos, body) => {
             todos.push(todo);
             Handle.successHandler(res, todos, '資料新增成功');
         } else {
-            Handle.errorHandle(res)
+            Handle.errorHandle(res, '資料新增失敗')
         }
     } catch (err) {
-        Handle.errorHandle(res)
+        Handle.errorHandle(res, '發生異常錯誤')
     }
 
 }

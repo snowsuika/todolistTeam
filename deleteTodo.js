@@ -12,9 +12,9 @@ const deleteSingleTodo = (req, res, todos) => {
     const index = todos.findIndex(item => item.id === id);
     if (index !== -1) {
         todos.splice(index, 1);
-        Handle.successHandler(res, todos);
+        Handle.successHandler(res, todos, '資料刪除成功');
     } else {
-        Handle.errorHandle(res)
+        Handle.errorHandle(res, '資料刪除失敗')
     }
 }
 
