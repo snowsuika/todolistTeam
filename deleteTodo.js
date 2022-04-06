@@ -3,7 +3,7 @@ const handle = require('./handle');
 /** 刪除全部 todos */
 const deleteAllTodos = (res, todos) => {
     todos.length = 0;
-    handle.successHandler(res, todos);
+    handle.successHandler(res, todos, '資料刪除成功');
 }
 
 /** 刪除單筆 todo */
