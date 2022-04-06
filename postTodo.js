@@ -29,18 +29,12 @@ const postTodo = (req, res, todos, body) => {
                 id: library.uuidv4()
             }
             todos.push(todo);
-            // TODO: 這裡應該改成用 Handle.successHandler
-            res.writeHead(HTTP_STATUS.OK.code, library.headers);
-            res.write(JSON.stringify({
-                'status': HTTP_STATUS.OK.message,
-                'data': todos
-            }))
-            res.end();
+            Handle.successHandler(res, todos, '資料新增成功');
         } else {
-            Handle.errorHandle(res)
+            Handle.errorHandle(res, '資料新增失敗')
         }
     } catch (err) {
-        Handle.errorHandle(res)
+        Handle.errorHandle(res, '發生異常錯誤')
     }
 
 }
