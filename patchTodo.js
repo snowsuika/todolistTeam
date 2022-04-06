@@ -1,4 +1,3 @@
-const { headers } = require("./library");
 const handle = require('./handle');
 
 const patchTodo = (req, res, todos, body) => {
@@ -10,7 +9,7 @@ const patchTodo = (req, res, todos, body) => {
             todos[index].title = title
             handle.successHandler(res, todos, '資料更新成功');
         } else {
-            handle.errorHandle(res, '欄位未填寫正確,或查無此Id');
+            handle.errorHandle(res, '欄位未填寫正確,或查無此 id');
         }
         res.end()
     } catch (err) {

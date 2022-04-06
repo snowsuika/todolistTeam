@@ -2,7 +2,7 @@ const library = require('./library');
 const HTTP_STATUS = require('./constants')
 
 const errorHandle = (res, message) => {
-    res.writeHead(HTTP_STATUS.BAD_REQUEST.cose, library.headers);
+    res.writeHead(HTTP_STATUS.BAD_REQUEST.code, library.headers);
     res.write(JSON.stringify(
         {
             "status": "false",
