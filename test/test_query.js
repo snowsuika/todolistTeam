@@ -15,7 +15,7 @@ describe('GET /todos 測試', () => {
             .expect(200)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(JSON.parse(res.text), ['status', 'data']);
+                assert.hasAllKeys(JSON.parse(res.text), ['status','message', 'data']);
                 done();
             });
     });
@@ -30,7 +30,7 @@ describe('POST /todos 測試', () => {
             .expect('Content-Type', /json/)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(res.body, ['status', 'data']);
+                assert.hasAllKeys(res.body, ['status','message', 'data']);
                 expect(res.body.data).to.be.a('array');
                 expect(res.body.data[0]).to.be.a('object');
                 assert.hasAllKeys(res.body.data[0], ['title', 'id']);
@@ -61,7 +61,7 @@ describe('DELETE /todos 刪除全部 測試', () => {
             .expect(200)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(res.body, ['status', 'data']);
+                assert.hasAllKeys(res.body, ['status','message', 'data']);
                 expect(res.body.data).to.be.a('array');
                 assert.equal(res.body.data.length, 0);
                 done();
@@ -94,7 +94,7 @@ describe('DELETE /todos 刪除單筆 測試', () => {
             .expect(200)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(res.body, ['status', 'data']);
+                assert.hasAllKeys(res.body, ['status','message','data']);
                 expect(res.body.data).to.be.a('array');
                 expect(res.body.data[0]).to.be.a('object');
                 assert.hasAllKeys(res.body.data[0], ['title', 'id']);
@@ -113,7 +113,7 @@ describe('PATCH /todos 編輯 測試', () => {
             .expect(200)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(res.body, ['status', 'data']);
+                assert.hasAllKeys(res.body, ['status','message', 'data']);
                 expect(res.body.data).to.be.a('array');
                 assert.equal(res.body.data.length, 0);
             });
@@ -135,7 +135,7 @@ describe('PATCH /todos 編輯 測試', () => {
             .send(patchObj)
             .end((err, res) => {
                 assert.notExists(err);
-                assert.hasAllKeys(res.body, ['status', 'data']);
+                assert.hasAllKeys(res.body, ['status','message', 'data']);
                 expect(res.body.data).to.be.a('array');
                 expect(res.body.data[0]).to.be.a('object');
                 assert.hasAllKeys(res.body.data[0], ['title', 'id']);
