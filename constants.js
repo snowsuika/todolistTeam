@@ -4,7 +4,7 @@ const HTTP_STATUS = {
       message: "OK."
   },
   BAD_REQUEST: {
-      cose: 400,
+      code: 400,
       message: "data not correct or find not todo!"
   },
   NOT_FOUND: {
