@@ -1,23 +1,18 @@
 const handle = require('./handle');
-const library = require("./library")
+const Todo = require('./models/todo');
 
-const postTodo = (req, res, todos, body) => {
+const postTodo = async (res, body) => {
     try {
-        const title = JSON.parse(body).title;
-        if (typeof (title) !== 'undefined') {
-            const todo = {
-                title,
-                id: library.uuidv4()
-            }
-            todos.push(todo);
-            handle.successHandler(res, todos, '資料新增成功');
-        } else {
-          handle.errorHandle(res, '資料新增失敗')
-        }
+        const { title, completed } = JSON.parse(body);
+        const newTodo = await Todo.create({
+            title,
+            completed,
+        });
+        handle.successHandler(res, newTodo, '資料新增成功');
     } catch (err) {
-      handle.errorHandle(res, '發生異常錯誤')
+        const errorField = Object.keys(err.errors).join('、');
+        handle.errorHandle(res, `${errorField} 欄位有誤，請重新確認`);
     }
-
-}
+};
 
 module.exports = postTodo;
