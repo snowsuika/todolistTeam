@@ -1,9 +1,20 @@
 const http = require('http');
+const mongoose = require('mongoose');
+
 const library = require("./library")
 const getTodo = require('./getTodo')
 const postTodo = require('./postTodo')
 const { deleteAllTodos, deleteSingleTodo } = require('./deleteTodo')
 const patchTodo = require('./patchTodo')
+
+mongoose.connect('mongodb://localhost:27017/todo')
+    .then(() => {
+        console.log('Mongo 連線成功')
+    })
+    .catch(e => {
+        console.log('Mongo 連線失敗', e)
+    });
+
 const todos = [];
 
 const requestListener = async (req, res) => {
