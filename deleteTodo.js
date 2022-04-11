@@ -1,8 +1,9 @@
 const handle = require('./handle');
+const Todo = require('./models/todo');
 
 /** 刪除全部 todos */
-const deleteAllTodos = (res, todos) => {
-    todos.length = 0;
+const deleteAllTodos = async (res, todos) => {
+    todos = await Todo.deleteMany({});
     handle.successHandler(res, todos, '資料刪除成功');
 }
 
