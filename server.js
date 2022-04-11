@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/todo')
         console.log('Mongo 連線失敗', e)
     });
 
-const todos = [];
+// const todos = [];
 
 const requestListener = async (req, res) => {
     let body = "";
@@ -25,6 +25,7 @@ const requestListener = async (req, res) => {
     req['body'] = body
 
     if (req.url == "/todos" && req.method == "GET") {
+        const todos = await Todo.find();
         getTodo(res, todos)
     } else if (req.url == "/todos" && req.method == "POST") {
         postTodo(req, res, todos, body)
