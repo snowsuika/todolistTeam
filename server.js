@@ -31,7 +31,7 @@ const requestListener = async (req, res) => {
     } else if (req.url == "/todos" && req.method == "DELETE") {
         deleteAllTodos(res, todos)
     } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
-        deleteSingleTodo(req, res, todos)
+        deleteSingleTodo(req, res)
     } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
         patchTodo(req, res, todos, body)
     } else if (req.method == "OPTIONS") {
