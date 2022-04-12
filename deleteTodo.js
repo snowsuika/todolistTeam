@@ -1,9 +1,10 @@
 const handle = require('./handle');
 const Todo = require('./models/todo');
+
 /** 刪除全部 todos */
-const deleteAllTodos = (res, todos) => {
-    todos.length = 0;
-    handle.successHandler(res, todos, '資料刪除成功');
+const deleteAllTodos = async (res) => {
+    const deleteAll = await Todo.deleteMany({});
+    handle.successHandler(res, deleteAll, '資料刪除成功');
 }
 
 /** 刪除單筆 todo */
