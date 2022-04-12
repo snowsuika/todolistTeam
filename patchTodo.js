@@ -1,7 +1,7 @@
 const handle = require('./handle');
 const Todo = require('./models/todo');
 
-const patchTodo = async (req, res, body) => {
+const patchTodo =  (req, res, body) => {
     try {
         const contxt = JSON.parse(body);
         const id = req.url.split('/').pop();
