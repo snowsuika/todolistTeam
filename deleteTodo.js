@@ -8,15 +8,17 @@ const deleteAllTodos = async (res) => {
 }
 
 /** 刪除單筆 todo */
-const deleteSingleTodo = (req, res, todos) => {
+const deleteSingleTodo =  (req, res) => {
     const id = req.url.split('/').pop();
-    const index = todos.findIndex(item => item.id === id);
-    if (index !== -1) {
-        todos.splice(index, 1);
-        handle.successHandler(res, todos, '資料刪除成功');
-    } else {
-        handle.errorHandle(res, '資料刪除失敗，找不到 id')
-    }
+    Todo.findByIdAndDelete(id, async (error, doc)=>{
+        if(error || doc === null) { //不存在id和格式不符時進來
+            handle.errorHandle(res, '資料刪除失敗，找不到 id');
+        } else {
+            const todos = await Todo.find();
+            handle.successHandler(res, todos, '資料刪除成功');               
+        }
+    })
+
 }
 
 module.exports = {

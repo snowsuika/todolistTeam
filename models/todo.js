@@ -12,6 +12,7 @@ const todoSchema = new mongoose.Schema(
     }
   },
   {
+    versionKey: false,
     timestamps: true,
     collection: 'todos'
   }
