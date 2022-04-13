@@ -20,7 +20,6 @@ mongoose.connect(DB)
         console.log('Mongo 連線失敗', e)
     });
 
-// const todos = [];
 
 const requestListener = async (req, res) => {
     let body = "";
@@ -34,11 +33,11 @@ const requestListener = async (req, res) => {
     } else if (req.url == "/todos" && req.method == "POST") {
         postTodo(res, body)
     } else if (req.url == "/todos" && req.method == "DELETE") {
-        deleteAllTodos(res, todos)
+        deleteAllTodos(res)
     } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
         deleteSingleTodo(req, res)
     } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
-        patchTodo(req, res, todos, body)
+        patchTodo(req, res, body)
     } else if (req.method == "OPTIONS") {
         res.writeHead(200, library.headers);
         res.end();
