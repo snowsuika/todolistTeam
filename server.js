@@ -8,7 +8,11 @@ const postTodo = require('./postTodo')
 const { deleteAllTodos, deleteSingleTodo } = require('./deleteTodo')
 const patchTodo = require('./patchTodo')
 
-mongoose.connect('mongodb://localhost:27017/todo')
+const dotenv = require('dotenv')
+dotenv.config({ path: "./config.env" })
+const DB = process.env.DATABASE
+
+mongoose.connect(DB)
     .then(() => {
         console.log('Mongo 連線成功')
     })
